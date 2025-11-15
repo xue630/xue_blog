@@ -1,6 +1,6 @@
 # xue_bolg
 
-This template should help get you started developing with Vue 3 in Vite.
+这是我从零设计实现的博客网站的前端代码，但其中繁琐且重复的部分是codegeex实现的
 
 ## Recommended IDE Setup
 
