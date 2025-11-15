@@ -213,82 +213,117 @@ export default{
         top: 20%;
         width: 100%;
         height: 80%;
-        /* background-color: aqua; */
+        padding: 0 30px;
+        box-sizing: border-box;
         display: flex;
         flex-wrap: wrap;
+        justify-content: center;
+        align-content: flex-start;
+        gap: 30px;
+        overflow-y: auto;
     }
     .art-show-main-card{
         position: relative;
-        background-color: rgba(194, 202, 202, 0.4);
-        border-radius: 20px;
-        margin-top: 40px;
-        margin-left: 100px;
-        margin-right: 60px;
-        width: 550px;
-        height: 350px;
+        background-color: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        width: 380px;
+        height: 480px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    .art-show-main-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
     }
     .art-cover-img{
         /* 封面 */
-        position: absolute;
-        /* left: 75px; */
-        width: 250px;
-        height: 200px;  
+        position: relative;
+        width: 100%;
+        height: 220px;
+        overflow: hidden;  
+    }
+    .art-cover-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+        border-radius: 16px 16px 0 0;
+    }
+    .art-cover-img img:hover {
+        transform: scale(1.05);
     }
     .art-title-and-cate-and-tag{
         /* 文章分类信息和标签 */
-        position: absolute;
-        left: 250px;
-        width: 300px;
-        height: 200px;
-        /* display: flex; */
-        /* background-color: aquamarine; */
+        position: relative;
+        padding: 20px;
+        width: 100%;
+        box-sizing: border-box;
     }
     .art-title{
-        position: absolute;
-        /* background-color: blue; */
-        top: 0px;
-        width: 300px;
-        height:40px;
-        flex-wrap: wrap;
-        overflow-y:auto;
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 12px;
+        color: #333;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        line-height: 1.4;
+        height: auto;
+        max-height: 50.4px;
     }
     .art-cate{
-        position: absolute;
-        /* background-color: rgb(40, 175, 96); */
-        top: 40px;
-        width: 300px;
-        height: 40px;
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+    }
+    .art-cate::before {
+        content: "";
+        display: inline-block;
+        width: 4px;
+        height: 14px;
+        background-color: #409EFF;
+        margin-right: 6px;
+        border-radius: 2px;
     }
     .art-tag{
-        position: absolute;
-        /* background-color: rgb(146, 139, 44); */
-        top: 80px;
-        width: 300px;
-        height: 60px;
-        /* height: 150px; */
+        margin-bottom: 8px;
         display: flex;
+        align-items: center;
         flex-wrap: wrap;
     }
+    .art-tag > div:first-child {
+        font-size: 14px;
+        color: #666;
+        margin-right: 6px;
+    }
     .art-time{
-        position: absolute;
-        /* background-color: rgb(116, 161, 82); */
-        width: 300px;
-        top: 140px;
-        height: 60px;
+        font-size: 13px;
+        color: #999;
+        display: flex;
+        align-items: center;
+        margin-bottom: 12px;
+    }
+    .art-time > div:first-child {
+        margin-right: 6px;
     }
     .art-summary{
         /* 文章摘要区域 */
-        position: absolute;
-        /* background-color: blue; */
-        width: 550px;
-        height: 150px;
-        top: 200px;
-        display: flex;
-        flex-wrap: wrap;
-        overflow-y:auto;
-    }
-    .art-summary:hover{
-        color: rgb(203, 175, 138);
+        font-size: 14px;
+        color: #666;
+        line-height: 1.6;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        padding: 0 20px 20px;
+        box-sizing: border-box;
     }
     .select-area{
         position: absolute;
