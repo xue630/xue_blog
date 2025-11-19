@@ -1,6 +1,7 @@
 <template>
     <div class="container">
         <div class="catalog">
+            <el-button type="primary" @click="back_article_page">返回文章页</el-button>
             <h1>目录</h1>
             <ul class="toc-list">
                 <li v-for="item in catalogue" :key="item.id" :class="'toc-level-' + item.level">
@@ -39,6 +40,10 @@ export default{
             console.log('获得文章id',StorageHelper.getItem('articleId'))
             console.log(this.catalogue);
         },
+        back_article_page(){
+            this.$router.push('/article');
+            // window.location.reload();
+        },
         scrollToHeading(id) {//点击目录滚动功能
             const element = document.getElementById(id);
             if (element) {
@@ -57,21 +62,20 @@ export default{
 <style >
 .container{
     min-height: 100vh;
+    display: flex;
+    width: 100%;
     /* background-color: aqua; */
 }
 .catalog{
-    position: fixed;
-    float: left;
     width: 19%;
     /* background-color: azure; */
-    height: 100%;
-    top:0%;
+    height: 100vh;
     overflow: auto;
+    position: sticky;
+    top: 0;
 }
 .main{
-    position: absolute;
-    left: 20%;
-    width: 80%;
+    width: 81%;
     height: 100%;
     /* background-color: beige; */
 }
