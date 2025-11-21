@@ -56,12 +56,12 @@
                         </el-form-item>
                         <el-form-item label="分类" required>
                             <el-select placeholder="请选择文章类型" v-model="addArticleDTO.categoryId" style="width: 60%;">
-                                <el-option v-for="(item) in category" :key="item.id" :label="item.label" :value="item.id" />
+                                <el-option v-for="(item) in category" :key="item.id" :label="item.categoryName" :value="item.id" />
                             </el-select>
                         </el-form-item>
                         <el-form-item label="标签" required>
                             <el-checkbox-group v-model="addArticleDTO.articleTag">
-                            <el-checkbox v-for="item in allTags" :key="item.id" :value="item">{{item.tag}}</el-checkbox>
+                            <el-checkbox v-for="item in allTags" :key="item.id" :value="item">{{item.tagName}}</el-checkbox>
                             </el-checkbox-group>
                         </el-form-item>
                     </el-form>

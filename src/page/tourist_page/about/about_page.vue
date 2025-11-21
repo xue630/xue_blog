@@ -31,7 +31,7 @@
 .about-page-container{
     /* background-color: aquamarine; */
     width: 100%;
-    height: 100%;
+    height: 95%;
     background-image: url('./about.png');
     background-repeat: no-repeat;
     background-position: center;
@@ -39,7 +39,7 @@
 }
 .about-card{
     position: absolute;
-    top: 15%;
+    top: 10%;
     left: 10%;
     width: 78%;
     height: 80%;

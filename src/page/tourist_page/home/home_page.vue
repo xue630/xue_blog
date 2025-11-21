@@ -13,7 +13,7 @@
     .home-main{
         position:absolute;
         width:100%;
-        height:100%;
+        height:95%;
         /* background-color: aquamarine; */
         background-image: url(./background.jpg);
         background-repeat: no-repeat;

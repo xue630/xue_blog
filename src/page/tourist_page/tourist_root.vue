@@ -12,6 +12,9 @@
             <router-view></router-view>
         </div>
     </div>
+    <div class="bottom">
+            <el-link href="https://beian.miit.gov.cn/" target="_blank" style="color: white;">苏ICP备2025220640号-1</el-link>
+        </div>
 </template>
 <script>
     export default{
@@ -50,7 +53,7 @@
 <style scoped>
     .container{
         min-height:100vh;
-        /* background-color: black; */
+        /* background-color: rgb(146, 143, 143); */
     }
     .header{
         position: sticky;
@@ -72,5 +75,14 @@
         width:100%;
         justify-content: center;
         /* height:100%; */
+    }
+    .bottom{
+        position:absolute;
+        background-color: #2c3e50;
+        width: 100%;
+        height: 10%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 </style>

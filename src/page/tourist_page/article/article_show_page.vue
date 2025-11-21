@@ -13,16 +13,17 @@
                 <div class="select-area-category">
 
 
-                    <el-select placeholder="请选择文章类型" v-model="checkArticleCate" class="select-area-category" @change="category_change_select">
+                    <el-select placeholder="请选择文章类型" v-model="ArticleListDTO.categoryId" class="select-area-category" @change="category_change_select" clearable>
 
 
 
                     <el-option v-for="(item) in category" :key="item.id" :label="item.categoryName" :value="item.id" />
 
-
-
                 </el-select>
                 </div>
+
+
+
                 <div class="select-area-tag-area">
                     <div class="select-area-tag-button">
                         <el-button type="primary" style="width: 25%; height: 50%;" @click="open_dialog">修改标签</el-button>
@@ -31,9 +32,15 @@
                         <el-tag v-for="item in tags" :key="item.id" closable @close="close_tag(item)">{{item.tagName}}</el-tag>
                     </div>
                     <el-dialog v-model="showDialog" >
+
+                        
                         <el-checkbox-group v-model="tags" @change="get_tag_list">
                             <el-checkbox v-for="item in allTags" :key="item.id" :value="item">{{item.tagName}}</el-checkbox>
                         </el-checkbox-group>
+
+
+
+
                         <template #footer>
                             <el-button @click="dialog_cannel">取消</el-button>
                             <el-button type="primary" @click="dialog_confirm">确定</el-button>
@@ -50,7 +57,7 @@
 
 
                 <div class="art-title-and-cate-and-tag">
-                    <div class="art-title">文章名：{{item.articleName}}</div>
+                    <div class="art-title">文章名：{{item.articleTitle}}</div>
                     <div class="art-cate">类型：{{item.categoryName}}</div>
                     <div class="art-tag">
                         <div>标签：</div>
@@ -80,15 +87,40 @@ import { StorageHelper } from '@/config/local_storage';
 export default{
 
     methods:{
-        category_change_select(value){
+        async category_change_select(value){
             //获取当前选择的内容
-            console.log("value:",value);
-            console.log(this.checkArticleCate);
+            
+            // console.log(this.checkArticleCate);
+
+            const response = await tourist_get_article_list(this.ArticleListDTO);
+            this.artList = response.data.data;
+
+            this.artList.forEach(element => {//将分类ID翻译为分类名称
+            const categoryItem = this.category.find(item => item.id === element.categoryId);
+            if (categoryItem) {
+                element.categoryName = categoryItem.categoryName;
+            } else {
+                element.categoryName = "未分类";
+            }
+        });
         },
-        close_tag(item){
+        async close_tag(item){
             //标签关闭按钮
-            console.log(item);
+            // console.log(item);
             this.tags.splice(this.tags.indexOf(item),1);
+            this.ArticleListDTO.tagIds.splice(this.ArticleListDTO.tagIds.indexOf(item.id),1);
+            
+            const response = await tourist_get_article_list(this.ArticleListDTO);
+            this.artList = response.data.data;
+
+            this.artList.forEach(element => {//将分类ID翻译为分类名称
+            const categoryItem = this.category.find(item => item.id === element.categoryId);
+            if (categoryItem) {
+                element.categoryName = categoryItem.categoryName;
+            } else {
+                element.categoryName = "未分类";
+            }
+        });
         },
         get_tag_list(value){
             //获取弹窗的列表
@@ -105,14 +137,34 @@ export default{
             this.oldTag='';
             this.showDialog=false;
         },
-        dialog_confirm(){
-            //弹窗点击确认
+        async dialog_confirm(){
+            //弹窗点击确认，请求后端，
             this.showDialog=false;
+            //给DTO的tagId赋值，tags取出id然后填入ArticleListDTO.tagIds
+
+            // console.log("已选标签",this.tags);
+            this.tags.forEach(element => {
+                this.ArticleListDTO.tagIds.push(element.id);
+            });
+
+            // console.log("发送请求，参数：",this.ArticleListDTO);
+            const response = await tourist_get_article_list(this.ArticleListDTO);
+            this.artList = response.data.data;
+
+            this.artList.forEach(element => {//将分类ID翻译为分类名称
+            const categoryItem = this.category.find(item => item.id === element.categoryId);
+            if (categoryItem) {
+                element.categoryName = categoryItem.categoryName;
+            } else {
+                element.categoryName = "未分类";
+            }
+        });
         },
 
 
         async select_by_name(){
             //按名称搜索按钮功能
+            console.log("搜索按钮被点击",this.ArticleListDTO);
             const response = await tourist_get_article_list(this.ArticleListDTO);
             this.artList = response.data.data;
 
@@ -176,7 +228,7 @@ export default{
             artList:[],//后端给的文章列表
 
 
-            checkArticleCate:'',
+            // checkArticleCate:'',
 
             oldTag:'',//因为弹窗取消复位
             

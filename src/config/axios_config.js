@@ -4,6 +4,7 @@ import axios from "axios";
 
 const axios_interceptor = axios.create({
     baseURL:'http://localhost:8080',
+    // baseURL:'/api',
     withCredentials: true //生效httpOnlyCoolie
 });
 
