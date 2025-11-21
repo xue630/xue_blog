@@ -37,10 +37,6 @@
                         <el-checkbox-group v-model="tags" @change="get_tag_list">
                             <el-checkbox v-for="item in allTags" :key="item.id" :value="item">{{item.tagName}}</el-checkbox>
                         </el-checkbox-group>
-
-
-
-
                         <template #footer>
                             <el-button @click="dialog_cannel">取消</el-button>
                             <el-button type="primary" @click="dialog_confirm">确定</el-button>
@@ -49,6 +45,10 @@
                 </div>
         </div>
         <div class="art-show-main">
+            <div v-if="!artList || artList.length === 0" class="artList-empty">
+                <el-empty description="没有文章喔" />
+            </div>
+
 
             <div class="art-show-main-card" v-for="item in artList" :key="item.id" @click="click_art_card(item)">
                 <div class="art-cover-img">
@@ -443,5 +443,12 @@ export default{
         display: flex;
         flex-wrap: wrap;
         gap: 6px;
+    }
+    .artList-empty{
+        position: absolute;
+        top: 15%;
+        left: 25%;
+        width: 50%;
+        height: 50%;
     }
 </style>

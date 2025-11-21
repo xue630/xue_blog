@@ -9,7 +9,7 @@ export const md = new MarkdownIt({
     breaks: true ,      // 换行转换为 <br>
     quotes: '“”‘’'
 }).use(markdownItAnchor, {
-    level: [1, 2, 3,4],
+    level: [1, 2, 3,4,5],
     slugify: generateId,
     // permalink: markdownItAnchor.permalink.headerLink()
     permalink:false
